@@ -7,19 +7,25 @@ class Board  extends Component {
     super();
     this.state = {
       square:Array(9).fill(null),
-      isNext:true
+      isNext:true,
+      data:null
     }
 
-  this.getData();
+
   }
-  getData(){
-    axios.get('https://4d913dfc.ngrok.io/',{})
+  componentDidMount(){
+    let self =this;//this
+    axios.get('https://1d0e8e54.ngrok.io/',{})
     .then(function(res){
-        console.log(res);
+        //console.log(res);
+        //this.setState("data")
+        self.setState({data:res.data});  //this  指向错误
+        //return res.data;
     })
     .catch(function(err){
         console.log(err);
-    })
+    });
+    //console.log(data);
 
 
   }
@@ -27,7 +33,8 @@ class Board  extends Component {
 
 
   handleClick(i){
-    this.getData();
+    //setInterval(this.getData(),3000);
+
     const squares = this.state.square.slice();
     if(this.getWin(squares)||squares[i]){
       return false;
@@ -67,16 +74,17 @@ class Board  extends Component {
 
   render() {
     const winner = this.getWin(this.state.square);
+    let data = this.state.data;
     let status;
     if(winner){
       status ='winne is'+winner;
     }else{
-
       status = this.state.isNext?'Next player: X':'Next player: O';
     }
     return (
       <div>
         <div className="status">{status}</div>
+        <div className="data">{data}</div>
         <div className="board-row">
           {this.renderSquare(0)}
           {this.renderSquare(1)}
