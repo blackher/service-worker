@@ -15,7 +15,7 @@ class Board  extends Component {
   }
   componentDidMount(){
     let self =this;//this
-    axios.get('https://1d0e8e54.ngrok.io/',{})
+    axios.get('https://72dbfc87.ngrok.io/',{})
     .then(function(res){
         //console.log(res);
         //this.setState("data")
