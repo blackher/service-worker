@@ -4,7 +4,7 @@ import './index.css';
 //import App from './App';
 //import registerServiceWorker from './registerServiceWorker';
 //import Board from './Board';
-import Like from './compent/like';
-
-ReactDOM.render(<Like  value ="red"/>, document.getElementById('root'));
+//import Like from './compent/like';
+import CommentApp from './compent/commenlist/commentApp'
+ReactDOM.render(<CommentApp  />, document.getElementById('root'));
 //registerServiceWorker();
