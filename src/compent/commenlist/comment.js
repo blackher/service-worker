@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+
+import PropTypes from 'prop-types';
 
 class Comment extends Component {
-
   static contextTypes = {
     themeColor: PropTypes.string
   }
-
   componentDidMount(){
+    console.log(this.context)
   }
   render () {
     return (

@@ -3,14 +3,12 @@ import PropTypes from 'prop-types'
 
 import Comment from './comment';
 class CommentList extends Component {
-  static childContextTypes = {
+
+  static contextTypes = {
     themeColor: PropTypes.string
   }
-  getChildContext () {
-    return { themeColor: '123' }
-  }
-
   render() {
+    console.log(this.context);
     const comments = [
        {username: 'Jerry', content: 'Hello'},
        {username: 'Tomy', content: 'World'},
