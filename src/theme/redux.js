@@ -1,8 +1,12 @@
 import React,{Component}  from 'react'
 
 import PropTypes from 'prop-types'
-
-export const connect =(mapStateToProps)=>(WrappedComponent)=>{
+/*
+*
+* mapStateToPros   update store value
+* mapDispatchToProps
+* */
+export const connect =(mapStateToProps,mapDispatchToProps)=>(WrappedComponent)=>{
 
     class Connect extends Component{
         static contextTypes ={
@@ -24,11 +28,13 @@ export const connect =(mapStateToProps)=>(WrappedComponent)=>{
         //更新所有的props
         _updateProps(){
             const {store} =this.context
-            let contextState = mapStateToProps(store.getState());
+            let stateProps = mapStateToProps?mapStateToProps(store.getState()):{}
+            let dispatchProps = mapDispatchToProps?mapDispatchToProps(store.dispatch):{}
             this.setState({
                 allProps:{
-                    ...contextState,
-                    ...this.props
+                    ...stateProps,
+                    ...this.props,
+                    ...dispatchProps
                 }
             })
         }

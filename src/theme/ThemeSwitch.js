@@ -1,38 +1,15 @@
 import React,{Component} from 'react';
-import PropTypes from "prop-types";
+
+import {connect} from "./redux";
 
 
 
 class ThemeSwitch extends Component{
 
-    constructor(){
-        super();
-        this.state = {themeColor:''}
-    }
-    static contextTypes = {
-        store:PropTypes.object//限制类型 object
-    }
-
-    componentWillMount(){
-        this._updateHeaderColor();
-    }
-
-    _updateHeaderColor(){
-        const {store} = this.context
-        console.log(store);
-        const  state = store.getState()
-        this.setState({themeColor:state.themeColor})
-    }
     handlChangeThemeColor(color){
-        console.log(color);
-        const {store} =this.context
-        store.dispatch({
-            type:'CHANGE_COLOR',
-            themeColor:color
-        })
-
+        console.log(this.props)
+        this.props.onSwitch(color)
     }
-
     render(){
         return(
             <div>
@@ -42,4 +19,20 @@ class ThemeSwitch extends Component{
         )
     }
 }
+const dispatchProps = (dispatch)=>{
+
+    return{
+        onSwitch:(color)=>{
+            return dispatch({type:'CHANGE_COLOR',themeColor:color})
+        }
+    }
+
+
+}
+const mapStateToProps = (state)=>{
+    return{
+        themeColor:state.themeColor
+    }
+}
+ThemeSwitch = connect(mapStateToProps,dispatchProps)(ThemeSwitch)
 export default ThemeSwitch

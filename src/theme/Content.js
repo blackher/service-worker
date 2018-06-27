@@ -21,7 +21,7 @@ class Content extends Component{
 }
 const mapStateToProps= (state)=>{
     return{
-        themeColor:state.themeColor
+        themeColor:state.themeColor//需要的属性值
     }
 }
 
