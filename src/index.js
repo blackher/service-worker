@@ -6,17 +6,12 @@ import './index.css';
 //import Board from './Board';
 //import Like from './compent/like';
 //import CommentApp from './compent/commenlist/commentApp'
-import PropTypes from 'prop-types'
+
 import Header from './theme/Header';
 import Content from './theme/Content';
+import {Provider} from './theme/redux';
 class Index extends Component{
-    static childContextTypes = {
-        store:PropTypes.object
-    }
 
-    getChildContext(){
-        return {store}
-    }
 
     render(){
         return(
@@ -61,5 +56,5 @@ const themeReducer = (state,action)=>{
 }
 const store = createStore(themeReducer);
 
-ReactDOM.render(<Index  />, document.getElementById('root'));
+ReactDOM.render(<Provider store={store}><Index  /></Provider>, document.getElementById('root'));
 //registerServiceWorker();
