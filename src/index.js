@@ -9,9 +9,9 @@ import './index.css';
 
 import Header from './theme/Header';
 import Content from './theme/Content';
-import {Provider} from './theme/redux';
+import {Provider} from 'react-redux';
+import {createStore} from 'redux';
 class Index extends Component{
-
 
     render(){
         return(
@@ -24,20 +24,20 @@ class Index extends Component{
 
 }
 //redux store
-function createStore(reducer){
-    let state =null;
-    const listeners =[];//监听器 处理各个组件的变化
-    const subscribe = (listener)=>{listeners.push(listener)};//订阅器
-    const  getState = ()=>state;
-    const dispatch = (action)=>{
-        state = reducer(state,action);
-        //console.log(listeners);
-        listeners.forEach((listener)=>listener());//触发监听器
-    }
-    dispatch({});//初始化
-
-    return{getState,dispatch,subscribe};
-}
+// function createStore(reducer){
+//     let state =null;
+//     const listeners =[];//监听器 处理各个组件的变化
+//     const subscribe = (listener)=>{listeners.push(listener)};//订阅器
+//     const  getState = ()=>state;
+//     const dispatch = (action)=>{
+//         state = reducer(state,action);
+//         //console.log(listeners);
+//         listeners.forEach((listener)=>listener());//触发监听器
+//     }
+//     dispatch({});//初始化
+//
+//     return{getState,dispatch,subscribe};
+// }
 //change theme color reducer
 const themeReducer = (state,action)=>{
     if(!state){

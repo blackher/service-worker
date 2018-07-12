@@ -9,6 +9,7 @@ import CommentList from './commentList';
 import './commentApp.css';
 
 
+import Button from 'antd/lib/button';
 
 class CommentApp extends Component{
   static childContextTypes = {
@@ -22,6 +23,7 @@ class CommentApp extends Component{
         <div className ='wrapper'>
             <CommentForm />
             <CommentList />
+            <Button type={} shape={} size={} htmlType={} onClick={} loading={} className={} icon={}/>
         </div>
       )
 
