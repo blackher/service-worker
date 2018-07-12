@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>socket</title>
+
+</head>
+
+<body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
+<script>
+    var socket = io('http://localhost:8081');
+    socket.on('news', function (data) {
+        console.log(data);
+        socket.emit('other', { my: 'data' });
+    });
+    setInterval(()=>{socket.emit('other', { my: 'data' });console.log("resss")},1000)
+</script>
+
+</body>
+</html>
