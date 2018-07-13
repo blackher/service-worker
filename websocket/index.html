@@ -3,18 +3,88 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>socket</title>
+    <style>
+        #cover{
+            position:absolute;
+
+            top:0;
+
+            bottom:0;
+
+            left:0;
+
+            right:0;
+
+            background:#00000052;
+
+            opacity:0.7;
+        }
+        #set{
+            position: fixed;
+            top: 30%;
+            left: 30%;
+
+        }
+
+
+    </style>
 
 </head>
 
 <body>
+<!--  遮罩层 -->
+<div id="cover">
+    <div id="set">
+        输入你的名字  :<input id="username" name="username">
+        <input type="submit"  value="提交" onclick="a()" ></input>
+    </div>
+</div>
+
+<div id="main">
+内容:<input id="content" type="text" />
+<input type="submit" value="发言" onclick="f()"/>
+</div>
+</body>
+<!-- 显示发言的内容  -->
+<div id="container">
+
+
+</div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
+
 <script>
-    var socket = io('http://localhost:8081');
-    socket.on('news', function (data) {
-        console.log(data);
-        socket.emit('other', { my: 'data' });
+    const socket = io('http://localhost:8081');
+
+    //setInterval(()=>{socket.emit('other', { my: 'data' });console.log("resss")},1000)
+    function f() {
+        let text =document.getElementById("content").value;
+        let name = localStorage.getItem("username");
+        //发言广播出去
+        let contentNode =document.createElement('div');
+        contentNode.innerHTML=text;
+        //console.log(document.getElementsByClassName("container"));
+        //首先加到自己的聊天里面去
+        document.getElementById("container").appendChild(contentNode);
+        //broadcast other client
+        socket.emit('speak',{name:name,content:text});
+
+    }
+    function a() {
+
+        let name =document.getElementById("username").value;
+        localStorage.setItem("username",name);//存储到本地
+        socket.emit('welcome',{name:name});//欢迎广播
+        document.getElementById("cover").style.display="none";//遮照层消失
+
+    }
+
+    socket.on('other speak', function (data) {
+
+        let otherContentNode =document.createElement('div');
+        otherContentNode.innerHTML ="name:  "+data.name+"content  "+ data.content;
+        document.getElementById('container').appendChild(otherContentNode);
     });
-    setInterval(()=>{socket.emit('other', { my: 'data' });console.log("resss")},1000)
+
 </script>
 
 </body>
