@@ -24,6 +24,7 @@ function handler (req, res) {
 
 io.on('connection', function (socket) {
 
+
     socket.on('disconnect', (reason) => {
         // ...
         console.log(reason);
@@ -42,10 +43,6 @@ io.on('connection', function (socket) {
 
     })
 
-    //setTimeout("socket.emit('news',{hello:'world'})",1000)
-    //socket.on('other', function (data) {
-        //console.log(data);
-    //});
     socket.on('speak',function(data){
         console.log(data);
         //其他人的聊天广播

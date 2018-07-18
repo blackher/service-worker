@@ -56,6 +56,10 @@
     const socket = io('http://localhost:8081');
 
     //setInterval(()=>{socket.emit('other', { my: 'data' });console.log("resss")},1000)
+    /*
+    *
+    * 发言点击事件广播
+    * */
     function f() {
         let text =document.getElementById("content").value;
         let name = localStorage.getItem("username");
@@ -69,6 +73,9 @@
         socket.emit('speak',{name:name,content:text});
 
     }
+    /*
+    * 触发获取用户姓名
+    * */
     function a() {
 
         let name =document.getElementById("username").value;
@@ -77,13 +84,17 @@
         document.getElementById("cover").style.display="none";//遮照层消失
 
     }
-
+    /*
+    * 接受别人的事件广播
+    * */
     socket.on('other speak', function (data) {
 
         let otherContentNode =document.createElement('div');
         otherContentNode.innerHTML ="name:  "+data.name+"content  "+ data.content;
         document.getElementById('container').appendChild(otherContentNode);
     });
+
+
 
 </script>
 
